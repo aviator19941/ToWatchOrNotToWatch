@@ -1,0 +1,86 @@
+.my-carousel {
+    margin-top: 20px;
+    width: 90%;
+}
+
+ngb-carousel {
+    max-width: 100%;
+    margin: 30px auto;
+    outline: 0;
+}
+
+.row {
+    float: left;
+    margin-left: 0%;
+}
+
+#slides-container {
+    transition: transform .2s;
+}
+
+#slides-container:hover {
+    transform: scale(1.07);
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to bottom, transparent 0%, black 70%);
+    width: 235px;
+    height: 330px;
+    opacity: 0;
+}
+
+.overlay-text-container {
+    float: left;
+    width: 90%;
+    height: inherit;
+    position: relative;
+}
+
+.overlay-text {
+    position: absolute;
+    color: white;
+    font-size: 25px;
+    bottom: 0;
+    margin-left: 15px;
+    margin-bottom: 35px;
+}
+
+#slides-container:hover .overlay {
+    opacity: 1;
+}
+
+::ng-deep .my-carousel3 .carousel-control-prev {
+    height: 30px;
+    width: 60px;
+    top: 45%;
+    left: -3%;
+}
+
+::ng-deep .my-carousel3 .carousel-control-next {
+    height: 30px;
+    width: 60px;
+    top: 45%;
+    margin-right: 1%;
+}
+
+::ng-deep .my-carousel3 .carousel-indicators {
+    bottom: -60px;
+    margin-left: 7.5%;
+}
+
+.recommended-container {
+    margin-left: 8%;
+    margin-top: 55px;
+    width: 90%;
+    height: 500px;
+}
+
+.cast {
+    color: white;
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: -2px;
+}

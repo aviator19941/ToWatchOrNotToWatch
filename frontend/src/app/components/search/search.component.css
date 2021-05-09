@@ -1,0 +1,40 @@
+.custom-form {
+    background-color: #050A28;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid white;
+    border-radius: 0;
+    width: 250px;
+}
+
+.form-control:focus{
+    border-color: #cccccc;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.search-bar {
+    margin-right: 50px;
+}
+
+.result-name {
+    color: white;
+    margin-left: 12px;
+}
+
+::ng-deep .dropdown-menu {
+    background-color: #040A30;
+    border: 1px solid white;
+}
+
+.picture {
+    margin-left: 15px;
+}
+
+a {
+    display: block;
+    width: calc(100% + 3rem);
+    height: calc(100% + .5rem);
+    margin-left: -1.5rem;
+    text-decoration: none;
+}

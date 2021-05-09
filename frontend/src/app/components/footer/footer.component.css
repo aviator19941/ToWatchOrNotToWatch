@@ -1,0 +1,7 @@
+.footer-grad {
+    height: 50px;
+    background-image: linear-gradient(to top, black 40%, #060B37 90%);
+    color: white;
+    font-size: 14px;
+    padding: 20px;
+}

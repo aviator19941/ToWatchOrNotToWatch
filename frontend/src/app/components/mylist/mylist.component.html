@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+<div class="center" *ngIf="!hasLocalStorage">
+    <p class="mylist-text">
+        No items found in Watchlist.
+    </p>
+</div>
+<div class="mylist-container">
+    <div class="" *ngIf="hasLocalStorage">
+        <p class="display-watchlist">
+            My WatchList
+        </p>
+    </div>
+    <div *ngFor="let group of dataFormatted">
+        <div class="row flex-row flex-nowrap">
+            <div class="col" *ngFor="let rec of group">
+                <a routerLink="/watch/{{rec.category}}/{{rec.id}}" rel="nofollow noopener noreferrer">
+                    <div id="slides-container">
+                        <div style="opacity: 0;">Padding</div>
+                        <img width="180px" class="img-responsive" style="float:left" [src]="rec.poster_path">
+                        <div class="overlay">
+                            <div class="overlay-text-container">
+                                <h3 class="overlay-text">{{rec.title}}</h3>
+                            </div>
+                        </div>
+                        <div style="opacity: 0;">Padding</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

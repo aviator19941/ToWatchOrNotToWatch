@@ -1,0 +1,12 @@
+<div class="search-bar">
+
+    <ng-template #rt let-r="result" let-t="term" let-s="result['id']">
+        <a routerLink="/watch/{{r['media_type']}}/{{r['id']}}">
+            <img [src]="'https://image.tmdb.org/t/p/w500' + r['backdrop_path']" class="mr-1 picture" style="width: 80px; height: 50px;">
+            <ngb-highlight class="result-name" [result]="r.name" [term]="t"></ngb-highlight>
+        </a>
+    </ng-template>
+
+    <input class="form-control mr-sm-2 custom-form" #input type="text" placeholder="Search" aria-label="Search" (selectItem)="onSelect($event, input)" [formControl]="searchTextInput" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" />
+
+</div>

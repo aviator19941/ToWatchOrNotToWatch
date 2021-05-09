@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <a routerLink="/" class="navbar-brand">USC Films</a>
+  <button class="navbar-toggler custom-toggler" data-toggle="collapse" (click)="isCollapsed = !isCollapsed" data-target="#navbarToggler">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarToggler" [ngbCollapse]="isCollapsed">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+          <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      </li>
+      <li class="nav-item">
+          <a routerLink="/mylist" class="nav-link" routerLinkActive="active">My List</a>
+      </li>
+    </ul>
+    <app-search></app-search>
+  </div>
+</nav>

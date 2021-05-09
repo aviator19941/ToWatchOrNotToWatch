@@ -1,0 +1,18 @@
+<div [ngClass]="isMobile ? 'my-carousel-mobile' : 'my-carousel'">
+    <ngb-carousel #carousel [interval]="5000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)" [showNavigationIndicators]="showNavigationIndicators">
+        <ng-template ngbSlide *ngFor="let datum of data; index as i">
+        <a routerLink="/watch/movie/{{datum.id}}" rel="nofollow noopener noreferrer">
+            <div style="opacity: 0;">Padding</div>
+            <div [ngClass]="isMobile ? 'picsum-img-wrapper slides-container-mobile' : 'picsum-img-wrapper slides-container'">
+                <img [src]="datum.backdrop_path" class="img-fluid" alt="My image {{i + 1}} description">
+                <div [ngClass]="isMobile ? 'carousel-caption overlay-mobile' : 'carousel-caption overlay'">
+                    <h3 [ngClass]="isMobile ? 'overlay-text-mobile' : 'overlay-text'">{{datum.title}}</h3>
+                </div>
+            </div>
+        </a>
+        </ng-template>
+    </ngb-carousel>
+</div>
+
+<div class="zoom">
+</div>

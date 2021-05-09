@@ -1,0 +1,25 @@
+<div class="my-carousel2" id="#my-carousel2" *ngIf="recommended">
+    <!-- Mobile section : one image per slide -->
+
+    <!-- Desktop section : multiple images per slide -->
+    <ngb-carousel #carousel *ngIf="!mobile" [interval]="0">
+        <ng-template ngbSlide *ngFor="let group of recommendedFormatted">
+            <div class="row flex-row flex-nowrap">
+                <div class="col" *ngFor="let rec of group">
+                    <a routerLink="/watch/{{rec.category}}/{{rec.id}}" rel="nofollow noopener noreferrer">
+                        <div id="slides-container">
+                            <div style="opacity: 0;">Padding</div>
+                            <img width="180px" class="img-responsive" style="float:left" [src]="rec.poster_path">
+                            <div class="overlay">
+                                <div class="overlay-text-container">
+                                    <h3 class="overlay-text">{{rec.title}}</h3>
+                                </div>
+                            </div>
+                            <div style="opacity: 0;">Padding</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </ng-template>
+    </ngb-carousel>
+</div>

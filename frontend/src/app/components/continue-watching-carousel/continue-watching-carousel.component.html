@@ -1,0 +1,50 @@
+<div class="recommended-container" *ngIf="hasLocalStorage">
+    <p [ngClass]="isMobile ? 'cast-mobile' : 'cast'">
+        Continue Watching
+    </p>
+    <div class="my-carousel3">
+        <!-- Mobile section : one image per slide -->
+        <div class="carousel-mobile">
+            <ngb-carousel *ngIf="isMobile" [interval]="0" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+                <ng-template ngbSlide *ngFor="let obj of data">
+                    <div class="row-mobile">
+                        <div class="col" id="col-mobile">
+                            <a routerLink="/watch/{{obj.category}}/{{obj.id}}" rel="nofollow noopener noreferrer">
+                                <div id="slides-container-mobile">
+                                    <div style="opacity: 0;">Padding</div>
+                                    <img width="235px" class="img-responsive" [src]="obj.poster_path">
+                                    <div class="overlay-mobile">
+                                        <h3 class="overlay-text-mobile">{{obj.title}}</h3>
+                                    </div>
+                                    <div style="opacity: 0;">Padding</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+    
+        <!-- Desktop section : multiple images per slide -->
+        <ngb-carousel #carousel *ngIf="!isMobile" [interval]="0" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+            <ng-template ngbSlide *ngFor="let group of dataFormatted">
+                <div class="row flex-row flex-nowrap">
+                    <div class="col" *ngFor="let rec of group">
+                        <a routerLink="/watch/{{rec.category}}/{{rec.id}}" rel="nofollow noopener noreferrer">
+                            <div id="slides-container">
+                                <div style="opacity: 0;">Padding</div>
+                                <img width="235px" class="img-responsive" style="float:left" [src]="rec.poster_path">
+                                <div class="overlay">
+                                    <div class="overlay-text-container">
+                                        <h3 class="overlay-text">{{rec.title}}</h3>
+                                    </div>
+                                </div>
+                                <div style="opacity: 0;">Padding</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-carousel>
+    </div>
+</div>

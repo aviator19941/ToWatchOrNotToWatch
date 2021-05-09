@@ -1,0 +1,161 @@
+<app-navbar></app-navbar>
+<div class="video-text" *ngIf="movieData">
+    <div class="embed-responsive embed-responsive-16by9">
+        <youtube-player videoId={{movieData.video.key}} suggestedQuality="highres"></youtube-player>
+    </div>
+    <div class="right-col">
+        <h1 class="title">{{titleText}}</h1>
+        <p class="tagline">{{movieData.detailsData.tagline}}</p>
+        <div>
+            <p class="movie-info">{{movieData.detailsData.release_date}}&#160;&#160;|&#160;&#160;★&#160;&#160;{{movieData.detailsData.vote_average}}&#160;|&#160;{{runtime}}</p>
+        </div>
+
+        <div class="genres-languages">
+            <p class="body-text" *ngIf="genresLength"><span class="heading-text">Genres</span> : {{genres}}</p>
+            <p class="body-text" *ngIf="spokenLanguagesLength"><span class="heading-text">Spoken Languages</span> : {{spokenLanguages}}</p>
+        </div>
+
+        <p>
+            <button class="watchlist-btn" (click)="changeSuccessMessage()">{{toggleWatchlist ? 'Remove from Watchlist' : 'Add to Watchlist' }}</button>
+        </p>
+        <div *ngIf="add">
+            <ngb-alert #selfClosingAlert *ngIf="successMessage" type="success" (closed)="successMessage = ''">{{ successMessage }}
+            </ngb-alert>
+        </div>
+        <div *ngIf="!add">
+            <ngb-alert #selfClosingAlert *ngIf="successMessage" type="danger" (closed)="successMessage = ''">{{ successMessage }}
+            </ngb-alert>
+        </div>
+    </div>
+</div>
+<div class="description-container" *ngIf="movieData">
+    <p class="description">
+        Description
+    </p>
+    <p class="description-text">
+        {{movieData.detailsData.overview}}
+    </p>
+</div>
+
+<div class="share-container">
+    <p class="share">
+        Share
+    </p>
+    <a *ngIf="movieData" class="fa fa-twitter fa-3x" href="https://twitter.com/intent/tweet?&text={{twitterText}}&url={{twitterYoutubeLink}}&hashtags=USC,CSCI571,FightOn" target="_blank"></a>
+    <a *ngIf="movieData" class="fa fa-facebook-square fa-3x" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{twitterYoutubeLink}}"></a>
+</div>
+
+<div class="cast-container" *ngIf="castLength">
+    <p class="cast">
+        Full Cast and Crew
+    </p>
+    <div class="cast-members container-fluid">
+        <div class="row flex-row flex-nowrap overflow-auto">
+            <div *ngFor="let castMember of castMembers; index as i;">
+                <div id="{{ 'profile' + i }}" class="card card-block2 card-padding" (click)="open(castMember.id, content)">
+                    <img class="img-block" src={{castMember.profile_path}}>
+                    <p id="{{ 'profileName' + i }}" class="cast-name">{{castMember.name}}</p>
+                    <p id="{{ 'profileAs' + i }}" class="as-text">AS</p>
+                    <p id="{{ 'profileCharacter' + i }}" class="cast-character">{{castMember.character}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="reviews-container" *ngIf="reviews">
+    <p class="cast" *ngIf="reviewsLength">
+        Reviews <span class="num-reviews">{{reviewsLength}}</span>
+    </p>
+
+    <div class="container-fluid">
+        <div class="flex-nowrap overflow-auto">
+            <div *ngFor="let review of reviews; index as i;">
+                <div class="card card2 mb-4">
+                    <div class="row">
+                        <div class="col-2">
+                            <img src={{review.avatar_path}} class="review-image">
+                        </div>
+                        <div class="col-9">
+                            <div class="author-text">
+                                A review created by {{review.author}}
+                                <div class="star-rating">
+                                    <span class="star">★</span>
+                                    <span class="rating-text">{{review.rating}}</span>
+                                </div>
+                            </div>
+                            <p class="created-at-text">
+                                Written by {{review.author}} on {{ review.created_at | date: "MMMM d, y, h:mm:ss a":'-0800' }}
+                            </p>
+                            <p class="content-text">
+                                {{review.content}}
+                            </p>
+                            <p class="review-url-p">
+                                <a href={{review.url}} target="_blank" class="review-url">Read the rest</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="recommended-container" *ngIf="recommendedLength">
+    <p class="cast">
+        Recommended Movies
+    </p>
+    <app-recommended-carousel></app-recommended-carousel>
+</div>
+
+<div class="similar-container" *ngIf="similarLength">
+    <p class="cast">
+        Similar Movies
+    </p>
+    <app-similar-carousel></app-similar-carousel>
+</div>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header" *ngIf="personData">
+      <h4 class="modal-title" id="modal-basic-title" *ngIf="personName">{{personName}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-image">
+            <img src={{personImage}} width="170px" height="260px">
+        </div>
+        <div class="right-modal-text-container">
+            <div *ngIf="birthday">
+                Birth: {{birthday}}
+            </div>
+            <div *ngIf="birthplace">
+                Birth Place: {{birthplace}}
+            </div>
+            <div *ngIf="gender">
+                Gender: {{gender}}
+            </div>
+            <div *ngIf="website">
+                Website: <a href={{website}} target="_blank">{{website}}</a>
+            </div>
+            <div *ngIf="knownFor">
+                Known for: {{knownFor}}
+            </div>
+            <div *ngIf="otherNames">
+                Also Known as: {{otherNames}}
+            </div>
+            <div class="externals">
+                <a *ngIf="imdb" class="fa fa-imdb fa-2x" href={{imdb}} target="_blank" triggers="mouseenter:mouseleave" ngbPopover="Visit IMDB"></a>
+                <a *ngIf="insta" class="fa fa-instagram fa-2x" href={{insta}} target="_blank" triggers="mouseenter:mouseleave" ngbPopover="Visit Instagram"></a>
+                <a *ngIf="fb" class="fa fa-facebook-square facebook-external fa-2x facebook" href={{fb}} target="_blank" triggers="mouseenter:mouseleave" ngbPopover="Visit Facebook"></a>
+                <a *ngIf="twitter" class="fa fa-twitter twitter-external fa-2x" href={{twitter}} target="_blank" triggers="mouseenter:mouseleave" ngbPopover="Visit Twitter"></a>
+            </div>
+        </div>
+        <div class="biography" *ngIf="biography">
+            <p class="bio-title">Biography</p>
+            <p class="bio-text">{{biography}}</p>
+        </div>
+    </div>
+</ng-template>
